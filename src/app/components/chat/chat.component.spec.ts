@@ -574,6 +574,42 @@ describe('ChatComponent', () => {
             );
       });
     });
+
+    describe('when audio recording is stopped and restarted', () => {
+      beforeEach(() => {
+        component.startAudioRecording();
+        expect(component.sessionHasUsedBidi.has(component.sessionId)).toBe(true);
+        component.stopAudioRecording();
+      });
+
+      it('should remove session from sessionHasUsedBidi set', () => {
+        expect(component.sessionHasUsedBidi.has(component.sessionId)).toBe(false);
+      });
+
+      it('should allow restarting audio recording', () => {
+        component.startAudioRecording();
+        expect(mockSnackBar.open).not.toHaveBeenCalled();
+        expect(component.isAudioRecording).toBe(true);
+      });
+    });
+
+    describe('when video recording is stopped and restarted', () => {
+      beforeEach(() => {
+        component.startVideoRecording();
+        expect(component.sessionHasUsedBidi.has(component.sessionId)).toBe(true);
+        component.stopVideoRecording();
+      });
+
+      it('should remove session from sessionHasUsedBidi set', () => {
+        expect(component.sessionHasUsedBidi.has(component.sessionId)).toBe(false);
+      });
+
+      it('should allow restarting video recording', () => {
+        component.startVideoRecording();
+        expect(mockSnackBar.open).not.toHaveBeenCalled();
+        expect(component.isVideoRecording).toBe(true);
+      });
+    });
   });
 
   describe('ChatPanel integration', () => {

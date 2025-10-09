@@ -992,6 +992,7 @@ export class ChatComponent implements OnInit, AfterViewInit, OnDestroy {
   stopAudioRecording() {
     this.streamChatService.stopAudioChat();
     this.isAudioRecording = false;
+    this.sessionHasUsedBidi.delete(this.sessionId);
   }
 
   toggleVideoRecording() {
@@ -1027,6 +1028,7 @@ export class ChatComponent implements OnInit, AfterViewInit, OnDestroy {
     }
     this.streamChatService.stopVideoChat(videoContainer);
     this.isVideoRecording = false;
+    this.sessionHasUsedBidi.delete(this.sessionId);
   }
 
   private getAsyncFunctionsFromParts(pendingIds: any[], parts: any[], invocationId: string) {
